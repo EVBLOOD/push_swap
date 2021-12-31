@@ -6,7 +6,7 @@
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:34:57 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/31 21:02:03 by sakllam          ###   ########.fr       */
+/*   Updated: 2021/12/31 21:47:40 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -446,32 +446,64 @@ int	ft_getthelongest(t_stack *data, int *number)
 	return (perf);
 }
 
+// int	ft_checkindex(t_stack **a, int start, int number)
+// {
+
+// }
 void	ft_pushing_intoit(t_stack **a, t_stack **b, int i, int number)
 {
 	t_stack	*tmp;
 	int		tot;
+	int		tmpi;
 
 	tmp = *a;
 	tot = i + number;
+	tmpi = i;
 	while (*a)
 	{
-		printf("\nelements:%d\n", (*a)->content);
 		if (i != (*a)->index)
 		{
 			ft_push(a, b);
+			ft_putstr_fd("pa\n", 1);
 			tmp = *a;
 		}
 		else
+		{
 			i++;
+			*a = (*a)->next;
+		}
 		if (i > tot)
 			break;
-		*a = (*a)->next;
 	}
+	i = tmpi;
+	*a = tmp;
+	while (*a)
+	{
+		if (i != (*a)->index)
+		{
+			puts("123\n");
+			*a = ft_revrserotate(tmp);
+			// exit (2);
+			ft_push(a, b);
+			tmp = *a;
+			i = tmpi;
+			*a = (*a)->next;
+		}
+		else
+		{
+			puts("1543\n");
+			i++;
+			*a = (*a)->next;
+		}
+		if (ft_stacksize(tmp) - number == -1)
+			break;
+	}
+	
 	*a = tmp;
 	while (*a)
 	{
 		printf("%d", (*a)->index);
-		puts()
+		*a = (*a)->next;
 	}
 }
 
