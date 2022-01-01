@@ -6,7 +6,7 @@
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:34:57 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/31 21:47:40 by sakllam          ###   ########.fr       */
+/*   Updated: 2022/01/01 18:38:35 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,35 +347,7 @@ void	ft_buttom(t_stack *tmpa, int index, t_stack **a, t_stack **b)
 	ft_push(a, b);
 	write(1, "pb\n", 3);
 }
-// void	ft_pushing_intoit(t_stack **a, t_stack **b, int i, int *tabtmp)
-// {
-// 	int	index;
-// 	t_stack	*tmpa;
-// 	t_stack *tmp;
-// 	int	j;
 
-// 	while (*a)
-// 	{
-// 		j = i / 4;
-// 		printf("\nelements:%d\n", (*a)->content);
-// 		while (j >= 0)
-// 		{
-// 			if ((*a)->content == tabtmp[j])
-// 			{
-// 				if (index > ft_stacksize(tmpa) / 2)
-// 					ft_buttom(tmpa, index, a, b);
-// 				else
-// 					ft_top(tmpa, index, a, b);
-// 				tmp = *a;
-// 				break ;
-// 			}
-// 			j--;
-// 		}
-// 		*a = (*a)->next;
-// 		index++;
-// 	}
-// 	*a = tmp;
-// }
 int	ft_coppyto(t_stack **data, int *tab)
 {
 	int		i;
@@ -446,10 +418,6 @@ int	ft_getthelongest(t_stack *data, int *number)
 	return (perf);
 }
 
-// int	ft_checkindex(t_stack **a, int start, int number)
-// {
-
-// }
 void	ft_pushing_intoit(t_stack **a, t_stack **b, int i, int number)
 {
 	t_stack	*tmp;
@@ -479,32 +447,68 @@ void	ft_pushing_intoit(t_stack **a, t_stack **b, int i, int number)
 	*a = tmp;
 	while (*a)
 	{
-		if (i != (*a)->index)
+		if (i > (*a)->index || i + number < (*a)->index)
 		{
-			puts("123\n");
 			*a = ft_revrserotate(tmp);
-			// exit (2);
 			ft_push(a, b);
 			tmp = *a;
 			i = tmpi;
 			*a = (*a)->next;
 		}
 		else
+			*a = (*a)->next;
+	}
+	*a = tmp;
+}
+
+int	ft_bestone(t_stack **a, t_stack **b, int i)
+{
+	int	indexbest;
+	int countmove;
+	t_stack	*tmpa;
+	t_stack	*tmpb;
+
+	tmpa = *a;
+	tmpb = *b;
+	countmove = 0;
+	while (*b)
+	{
+		countmove = 0;
+		while (*a)
 		{
-			puts("1543\n");
-			i++;
+			if ((*a)->index < (*b)->index)
+				countmove++;
+			else
+				break;
 			*a = (*a)->next;
 		}
-		if (ft_stacksize(tmp) - number == -1)
-			break;
+		if (countmove)
+		*b = (*b)->next;
+		countmove++;
 	}
-	
-	*a = tmp;
+	return (indexbest);
+}
+
+void	ft_wetry(t_stack **a, t_stack **b, int i)
+{
+	t_stack	**vrta;
+	t_stack	**vrtb;
+	t_list	*tmpa;
+	t_list	*tmpb;
+
+	tmpa = *a;
+	tmpb = *b;
 	while (*a)
 	{
-		printf("%d", (*a)->index);
+		ft_push(a, vrta);
 		*a = (*a)->next;
 	}
+	while (*b)
+	{
+		ft_push(b, vrtb);
+		*b = (*b)->next;
+	}
+	ft_bestone(tmpa, tmpb, i);
 }
 
 void	ft_sorttwo(t_stack **data, int size)
@@ -526,6 +530,7 @@ void	ft_sorttwo(t_stack **data, int size)
 		i = i - number;
 		// printf("index: %d|number: %d\n", i, number);
 		ft_pushing_intoit(data, &b, i, number);
+		ft_wetry();
 		// puts("is it here?");
 	// }
 }
