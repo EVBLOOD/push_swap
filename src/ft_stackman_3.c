@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stackclear.c                                    :+:      :+:    :+:   */
+/*   ft_stackman_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 10:52:02 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/30 15:36:13 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/16 05:49:40 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/16 07:11:51 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	ft_stackclear(t_stack **lst)
+void	ft_stackadd_back(t_stack **lst, t_stack *new)
 {
-	t_stack	*temp;
+	t_stack	*ptr;
 
-	temp = NULL;
 	if (!*lst)
-		return ;
-	while (*lst)
+		ft_stackadd_front(lst, new);
+	else
 	{
-		temp = *lst;
-		(*lst) = (*lst)->next;
-		free(temp);
+		ptr = ft_stacklast((*lst));
+		ptr->next = new;
 	}
+}
+
+void	ft_stackadd_front(t_stack **lst, t_stack *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
+
+void	ft_stackdelone(t_stack *lst)
+{
+	if (!lst)
+		return ;
+	free(lst);
 }

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 18:46:17 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/22 17:19:51 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/16 05:20:29 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/16 09:04:39 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	ft_stackdelone(t_stack *lst)
+int	main(int argc, char **argv)
 {
-	if (!lst)
-		return ;
-	free(lst);
+	t_stack	*data;
+
+	data = NULL;
+	if (argc > 1)
+		data = ft_getparams(argv, argc);
+	if (argc == 1 || !data)
+	{
+		ft_putstr_fd("error", 2);
+		exit (1);
+	}
+	ft_sortstack(&data);
+	ft_stackclear(&data);
+	return (0);
 }

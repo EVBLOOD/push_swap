@@ -1,31 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stacksize.c                                     :+:      :+:    :+:   */
+/*   ft_stackman.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 16:59:23 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/31 12:36:56 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/16 05:43:14 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/16 08:50:35 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-int	ft_stacksize(t_stack *lst)
+void	ft_stackclear(t_stack **lst)
 {
+	t_stack	*temp;
+
+	temp = NULL;
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		temp = *lst;
+		(*lst) = (*lst)->next;
+		free(temp);
+	}
+}
+
+int	*ft_stackcopy(t_stack *head)
+{
+	int		*tab;
 	int		i;
 	t_stack	*tmp;
 
 	i = 0;
-	if (!lst)
-		return (0);
-	tmp = lst;
-	while (lst)
+	tmp = head;
+	tab = malloc(sizeof(int) * ft_stacksize(head));
+	if (!tab)
+		return (NULL);
+	head = tmp;
+	while (head)
 	{
+		tab[i] = head->content;
+		head = head->next;
 		i++;
-		lst = lst->next;
 	}
-	lst = tmp;
-	return (i);
+	head = tmp;
+	return (tab);
 }

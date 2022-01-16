@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stackfun.c                                      :+:      :+:    :+:   */
+/*   ft_stackcmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/23 23:27:19 by sakllam           #+#    #+#             */
-/*   Updated: 2021/12/31 19:25:30 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/16 05:44:08 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/16 08:51:09 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ft_swap(t_stack *all)
 {
@@ -22,18 +22,18 @@ void	ft_swap(t_stack *all)
 	swap = all->index;
 	all->index = all->next->index;
 	all->next->index = swap;
-	swap = all->push;
-	all->push = all->next->push;
-	all->next->push = swap;
 }
 
 void	ft_push(t_stack **one, t_stack **two)
 {
 	t_stack	*new_node;
+	t_stack	*tmp;
 
-	new_node = ft_stacknew((*one)->content, (*one)->push, (*one)->index);
+	tmp = *one;
+	new_node = ft_stacknew((*one)->content, (*one)->index);
 	ft_stackadd_front(two, new_node);
 	*one = (*one)->next;
+	free(tmp);
 }
 
 t_stack	*ft_revrserotate(t_stack *all)
