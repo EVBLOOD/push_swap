@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_norm.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 14:12:06 by sakllam           #+#    #+#             */
-/*   Updated: 2022/01/19 21:35:10 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/19 22:50:11 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/19 22:50:50 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc_bonus/push_swap.h"
+#include "get_next_line/get_next_line.h"
 
-char	*ft_strjoin(char *s1, const char *s2)
+int	rest_cond(const char *line, t_stack **a, t_stack **b)
 {
-	int		i;
-	int		k;
-	int		count;
-	char	*p;
+	int	size;
 
-	if (!s1 || !s2)
-		return (NULL);
-	i = ft_strlen(s1);
-	k = ft_strlen(s2);
-	count = i + k + 1;
-	p = (char *) malloc(count * sizeof(char));
-	if (!p)
-		return (NULL);
-	i = 0;
-	k = i;
-	while (s1[k])
-		p[i++] = s1[k++];
-	k = 0;
-	while (s2[k])
-		p[i++] = s2[k++];
-	p[i] = '\0';
-	return (p);
+	size = ft_strlen(line);
+	if (!ft_strncmp(line, "rrr\n", size))
+	{
+		*a = ft_revrserotate(*a);
+		*b = ft_revrserotate(*b);
+	}
+	else
+	{
+		write(1, "error\n", 6);
+		return (0);
+	}
+	return (1);
 }
