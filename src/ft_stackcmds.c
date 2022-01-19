@@ -6,7 +6,7 @@
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 05:44:08 by sakllam           #+#    #+#             */
-/*   Updated: 2022/01/16 08:51:09 by sakllam          ###   ########.fr       */
+/*   Updated: 2022/01/18 02:39:47 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_stack	*ft_revrserotate(t_stack *all)
 {
 	t_stack	*tmp;
 
+	if (ft_stacksize(all) <= 1)
+		return (all);
 	tmp = ft_stacklast(all);
 	ft_stackbeflast(all)->next = NULL;
 	ft_stackadd_front(&all, tmp);
@@ -50,6 +52,8 @@ t_stack	*ft_rotate(t_stack *all)
 {
 	t_stack	*newhead;
 
+	if (ft_stacksize(all) <= 1)
+		return (all);
 	newhead = all->next;
 	all->next = NULL;
 	ft_stackadd_back(&newhead, all);

@@ -6,7 +6,7 @@
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 11:32:49 by sakllam           #+#    #+#             */
-/*   Updated: 2022/01/16 08:57:25 by sakllam          ###   ########.fr       */
+/*   Updated: 2022/01/19 21:09:46 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
+typedef struct s_best
+{
+	int				a;
+	int				b;
+	int				tmpa;
+	int				tmpb;
+}	t_best;
 typedef struct s_stack
 {
 	int				content;
@@ -53,4 +60,9 @@ int		ft_optimize(int corrent, int count);
 int		ft_movementsfuture(t_stack *a, int corrent);
 int		ft_getthecount(t_stack *b, int index);
 int		ft_bestmovesindex(t_stack *a, t_stack *b, int index, int correntb);
+int		ft_ismidel(int *corrent, int size);
+char	ft_isanrorrr(int moves, t_stack *x);
+int		ft_co(t_best corrent, t_stack *tmpa,
+			t_stack *tmpb, int correntb);
+void	ft_moveittoa(t_stack **a, t_stack **b, int index, int toa);
 #endif

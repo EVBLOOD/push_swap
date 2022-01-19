@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 06:39:55 by sakllam           #+#    #+#             */
-/*   Updated: 2022/01/16 08:52:35 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/18 09:59:54 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/18 10:01:38 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,60 +50,26 @@ void	ft_pushtob(t_stack **a, t_stack **b)
 	}
 }
 
-int	ft_bestmovesindex(t_stack *a, t_stack *b, int index, int correntb)
+char	ft_isanrorrr(int moves, t_stack *x)
 {
-	int		perfect;
-	int		corrent;
-	t_stack	*tmpa;
-	t_stack	*tmpb;
-
-	perfect = ft_stacksize(a) + ft_stacksize(b);
-	correntb = 0;
-	tmpb = b;
-	tmpa = a;
-	index = b->index;
-	while (b)
-	{
-		corrent = ft_optimize(ft_movementsfuture(a, b->index),
-				ft_stacksize(tmpa));
-		if (perfect > ft_optimize(correntb, ft_stacksize(tmpb)) + corrent)
-		{
-			index = b->index;
-			perfect = ft_optimize(correntb, ft_stacksize(tmpb)) + corrent;
-		}
-		b = b->next;
-		correntb++;
-		a = tmpa;
-	}
-	b = tmpb;
-	return (index);
+	if (ft_optimize(moves, ft_stacksize(x)) != moves)
+		return ('r');
+	return ('n');
 }
 
-void	ft_moveittoa(t_stack **a, t_stack **b, int index, int toa)
+int	ft_ismidel(int *corrent, int size)
 {
-	int		tob;
-	t_stack	*tmp;
-	t_stack	*tmpa;
+	int	x;
 
-	tmp = *b;
-	tmpa = *a;
-	tob = ft_getthecount(*b, index);
-	toa = ft_movementsfuture(*a, index);
-	if (tob != ft_optimize(tob, ft_stacksize(*b))
-		&& toa != ft_optimize(toa, ft_stacksize(*a)))
-		ft_bothr(a, b, ft_optimize(toa, ft_stacksize(*a)),
-			ft_optimize(tob, ft_stacksize(*b)));
-	else if (tob == ft_optimize(tob, ft_stacksize(*b))
-		&& toa != ft_optimize(toa, ft_stacksize(*a)))
-		ft_bisn_aisr(a, b, ft_optimize(toa, ft_stacksize(*a)),
-			ft_optimize(tob, ft_stacksize(*b)));
-	else if (tob == ft_optimize(tob, ft_stacksize(*b))
-		&& toa == ft_optimize(toa, ft_stacksize(*a)))
-		ft_bothn(a, b, ft_optimize(toa, ft_stacksize(*a)),
-			ft_optimize(tob, ft_stacksize(*b)));
-	else
-		ft_bisr_aisn(a, b, ft_optimize(toa, ft_stacksize(*a)),
-			ft_optimize(tob, ft_stacksize(*b)));
+	x = size / 2;
+	if (size % 2 == 0 && size / 2 == *corrent)
+		return (*corrent);
+	else if (size % 2 == 1 && x == *corrent)
+	{
+		(*corrent)++;
+		return (*corrent);
+	}
+	return (-1);
 }
 
 void	ft_sortinga(t_stack **a, t_stack **b)
