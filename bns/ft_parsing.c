@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakllam <sakllam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 21:26:22 by sakllam           #+#    #+#             */
-/*   Updated: 2022/01/19 21:48:09 by sakllam          ###   ########.fr       */
+/*   Created: 2022/01/16 05:23:31 by sakllam           #+#    #+#             */
+/*   Updated: 2022/01/20 01:09:06 by sakllam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc_bonus/push_swap.h"
+#include "get_next_line/get_next_line.h"
 
 t_stack	*ft_spacestack(char **all)
 {
@@ -23,7 +24,8 @@ t_stack	*ft_spacestack(char **all)
 	while (all[++i])
 	{
 		send = ft_stacknew(ft_atoi(all[i]), 0);
-		if (!send)
+		if (!send || (ft_atoiprime(all[i]) > 2147483647
+				|| ft_atoiprime(all[i]) < -2147483648))
 		{
 			ft_stackclear(&head);
 			return (NULL);
